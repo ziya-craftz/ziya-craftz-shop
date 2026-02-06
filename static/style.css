@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+.nav {
+    background: black;
+    padding: 15px;
+}
+
+.nav a {
+    color: white;
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    height: 80vh;
+    background: linear-gradient(to right, #000, #333);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.section {
+    padding: 40px;
+    background: white;
+}
+
+.products {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 250px;
+    background: white;
+    border: 1px solid #ddd;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+/* ===== ANIMATIONS ===== */
+
+/* Page fade-in */
+body {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Card hover animation */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Button animation */
+.card-content a,
+.hero a {
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.card-content a:hover,
+.hero a:hover {
+    transform: scale(1.05);
+}
+/* WhatsApp button hover */
+.card a {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card a:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+/* Stock status */
+.stock.in {
+    color: green;
+    font-weight: bold;
+}
+
+.stock.out {
+    color: red;
+    font-weight: bold;
+}
+.logo-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 30px;
+}
+/* Hero logo */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-logo {
+    width: 150px;      /* medium size */
+    margin-bottom: 20px;
+}

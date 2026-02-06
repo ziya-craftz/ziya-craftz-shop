@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>My Shop</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+        .nav {
+            background: #111;
+            padding: 15px;
+            color: white;
+        }
+        .nav a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .hero {
+            height: 80vh;
+            background: linear-gradient(to right, #000, #333);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .hero a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav">
+    <span class="logo-text">Ziya-Craftz</span>
+
+    <a href="/">Home</a>
+    <a href="/shop">Shop</a>
+    <a href="/admin">Admin</a>
+</div>
+
+
+<div class="hero">
+    <div class="hero-content">
+
+        <!-- LOGO -->
+        <img src="/static/logo (2).png" alt="Ziya-Craftz Logo" class="hero-logo">
+
+        <h1>Frame your smiles with our frames</h1>
+        <p>pick what your soul wishes.</p>
+        <a href="/shop">Explore Products</a>
+
+    </div>
+</div>
+
+
+<div class="section">
+    <h2 style="text-align:center;">Featured Products</h2>
+
+    <div class="products">
+        {% for p in products %}
+        <div class="card">
+            <img src="/static/uploads/{{ p.image }}">
+            <div class="card-content">
+                <h3>{{ p.name }}</h3>
+                <p>Rs. {{ p.price }}</p>
+                <p class="stock {{ 'in' if p.stock_status=='In Stock' else 'out' }}">
+    {{ p.stock_status }}
+</p>
+
+                <a href="/shop">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+     
+<footer style="
+    margin-top:40px;
+    padding:20px;
+    text-align:center;
+    background:#111;
+    color:#aaa;
+    font-size:14px;
+">
+    © 2026 My Shop • Built with Flask
+</footer>
+
+</body>
+</html>
+
