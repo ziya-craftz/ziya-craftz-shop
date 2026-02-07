@@ -15,8 +15,8 @@ def init_db():
     conn.execute("""
         CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            price REAL,
+            name TEXT NOT NULL,
+            price REAL NOT NULL,
             description TEXT,
             stock_status TEXT
         )
@@ -24,6 +24,7 @@ def init_db():
     conn.close()
 
 init_db()
+
 
 @app.route("/")
 def home():
@@ -40,24 +41,34 @@ def home():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method == "POST":
-        name = request.form["name"]
-        price = request.form["price"]
-        description = request.form["description"]
-        stock_status = request.form["stock_status"]
+        try:
+            name = request.form.get("name")
+            price = request.form.get("price")
+            description = request.form.get("description")
+            stock_status = request.form.get("stock_status")
 
-        image = request.files["image"]
-        image_name = image.filename
-        image.save(os.path.join(app.config["UPLOAD_FOLDER"], image_name))
+            # SAFETY CHECK
+            if not name or not price:
+                return "Name and price are required", 400
 
-        conn = get_db_connection()
-        conn.execute(
-            "INSERT INTO products (name, price, description, stock_status, image) VALUES (?, ?, ?, ?, ?)",
-            (name, price, description, stock_status, image_name)
-        )
-        conn.commit()
-        conn.close()
+            price = float(price)  # THIS LINE IS CRITICAL
 
-        return redirect("/admin")
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO products (name, price, description, stock_status) VALUES (?, ?, ?, ?)",
+                (name, price, description, stock_status)
+            )
+            conn.commit()
+            conn.close()
+
+            return redirect("/admin")
+
+        except Exception as e:
+            return f"ERROR: {e}", 500
+
+    return render_template("admin.html")
+
+       
 
     conn = get_db_connection()
     products = conn.execute("SELECT * FROM products").fetchall()
