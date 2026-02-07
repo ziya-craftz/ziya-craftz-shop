@@ -1,6 +1,7 @@
-from flask import Flask, request, redirect, render_template
-import sqlite3
 import os
+import sqlite3
+from flask import Flask, request, redirect, render_template
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
@@ -15,15 +16,17 @@ def init_db():
     conn.execute("""
         CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            price REAL NOT NULL,
+            name TEXT,
+            price REAL,
             description TEXT,
-            stock_status TEXT
+            stock_status TEXT,
+            image TEXT
         )
     """)
     conn.close()
 
 init_db()
+
 
 
 @app.route("/")
